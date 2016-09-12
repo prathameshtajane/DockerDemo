@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Docker Demo</title>
+    <meta name="description" content="HTML5, CSS3"/>
+    <meta name="keywords" content="HTML5, CSS3, Theme,bootstrap3,clean design"/>
+
+    <!--bootstrap3 css-->
+    <link th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" rel="stylesheet"/>
+    <!--ion icon fonts css-->
+    <link th:href="@{/icons/css/ionicons.css}" href="../../icons/css/ionicons.css" rel="stylesheet"/>
+    <!--custom css-->
+    <link th:href="@{/css/style.css}" href="../../css/style.css" rel="stylesheet" type="text/css"/>
+    <!--google  font family-->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,900' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400italic' rel='stylesheet' type='text/css'/>
+    <!--flex slider css-->
+    <link th:href="@{/css/flexslider.css}" href="../../css/flexslider.css" rel="stylesheet"/>
+    <!--animated  css-->
+    <link th:href="@{/css/animate.css}" href="../../css/animate.css" rel="stylesheet"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h2>
+                    Hostname:
+                </h2>
+                <p th:text="${hostname}"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
