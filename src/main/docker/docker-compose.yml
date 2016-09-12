@@ -1,11 +1,11 @@
 version: '2'
 services:
-  web:
+  spring-web:
     build: .
-  lb:
+  ha-proxy:
     image: dockercloud/haproxy
     links:
-      - web
+      - spring-web
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
