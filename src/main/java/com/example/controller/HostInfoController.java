@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.UnknownHostException;
@@ -25,7 +24,7 @@ public class HostInfoController {
     public HostService hostService;
 
     @RequestMapping("/host")
-    public Host greeting(@RequestParam(value="name", defaultValue="World") String name) {
+    public Host getHost() {
 
         try {
             return new Host(hostService.getHostIpAddress(), hostService.getHostname());
