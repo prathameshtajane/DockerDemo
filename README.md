@@ -1,5 +1,5 @@
 # DockerDemo
-Spring application to demo Docker
+Spring Boot application to demo Docker
 
 To run Docker Compose cd into the src/main/docker folder where you will find the docker-compose.yml file and the Dockerfile and type "docker-compose up". (you need the latest version of Docker Engine and Docker Compose installed)
 
