@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.net.UnknownHostException;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by trevor on 9/11/16.
@@ -18,7 +17,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Controller
 public class HostInfoController {
 
-    private final AtomicLong counter = new AtomicLong();
+    private static int counter = 0;
     private static final Logger LOGGER = LoggerFactory.getLogger(HostInfoController.class);
 
     @Autowired
@@ -30,6 +29,7 @@ public class HostInfoController {
         try {
             String hostname = hostService.getHostname();
             model.addAttribute("hostname", hostname);
+            model.addAttribute("counter", ++counter);
             return new Host(hostService.getHostIpAddress(), hostname);
         } catch (UnknownHostException e) {
             LOGGER.error("Unable to obtain host information", e);
