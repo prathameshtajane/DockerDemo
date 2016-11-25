@@ -3,9 +3,7 @@ Spring Boot application to demo Docker
 
 To run Docker Compose cd into the src/main/docker folder where you will find the docker-compose.yml file and the Dockerfile and type "docker-compose up". (you need the latest version of Docker Engine and Docker Compose installed)
 
-The Dockerfile looks for app.jar in the same folder when building the image and running the application.  
-If you make modifications to the application you will need to run "mvn package" from the project root and then copy the new build artifact from the target folder into the docker folder and rename to app.jar.  
-There is obviously room for automating this with maven each time you build.
+The Dockerfile copies the jar file from the target folder.  You need to first run "mvn clean package" to create the build artifact.
 
 Go to the browser and type http://localhost:80/host This will hit the HA proxy load balancer. If you go refresh the browser several times you'll notice the hostname doesn't change.  This is because there is only one
 "spring-web" service running this simple Spring Boot application.
