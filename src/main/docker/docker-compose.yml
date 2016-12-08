@@ -1,7 +1,17 @@
 version: '2'
 services:
   spring-web:
-    build: .
+    depends_on:
+      - redis
+    image: thomptr/dockerdemo
+    links:
+      - redis
+#    build: .
+  redis:
+    image: redis:3.2
+    hostname: redis
+    ports:
+      - "6379:6379"
   ha-proxy:
     image: dockercloud/haproxy
     links:

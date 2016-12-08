@@ -30,6 +30,7 @@ public class HostInfoController {
             String hostname = hostService.getHostname();
             model.addAttribute("hostname", hostname);
             model.addAttribute("counter", ++counter);
+            model.addAttribute("clusterCount", hostService.calculateClusterCount());
             return new Host(hostService.getHostIpAddress(), hostname);
         } catch (UnknownHostException e) {
             LOGGER.error("Unable to obtain host information", e);
