@@ -6,6 +6,8 @@ services:
     image: thomptr/dockerdemo
     links:
       - redis
+    environment:
+      - SPRING_PROFILES_ACTIVE=redis
 #    build: .
   redis:
     image: redis:3.2
