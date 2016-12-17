@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.net.UnknownHostException;
+import java.util.Arrays;
 
 /**
  * Created by trevor on 9/11/16.
@@ -18,7 +19,7 @@ import java.net.UnknownHostException;
 @Controller
 public class HostInfoController {
 
-    private static int counter = 0;
+    private int counter = 0;
     private static final Logger LOGGER = LoggerFactory.getLogger(HostInfoController.class);
 
     @Autowired
@@ -34,8 +35,8 @@ public class HostInfoController {
             String hostname = hostService.getHostname();
             model.addAttribute("hostname", hostname);
             model.addAttribute("counter", ++counter);
-            String[] envs = this.env.getActiveProfiles();
-            if (envs[0].toString().equals("redis")) {
+
+            if (Arrays.asList(env.getActiveProfiles()).contains("redis")) {
                 model.addAttribute("clusterCount", hostService.calculateClusterCount());
             } else {
                 model.addAttribute("clusterCount", "Redis not enabled");

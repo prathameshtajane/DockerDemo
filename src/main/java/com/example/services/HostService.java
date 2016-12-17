@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Arrays;
 
 /**
  * Created by trevor on 9/11/16.
@@ -28,9 +29,9 @@ public class HostService {
 
     // Set the cluster count in cache value if it doesn't exist
     @PostConstruct
-    public void initClusterCount() throws Exception {
-        String[] envs = this.env.getActiveProfiles();
-        if (envs[0].toString().equals("redis")) {
+    public void initClusterCount() {
+
+        if (Arrays.asList(env.getActiveProfiles()).contains("redis")) {
             valueOps = stringRedisTemplate.opsForValue();
             if (valueOps.get("cluster-count") == null) {
                 valueOps.set("cluster-count", Integer.toString(clusterCount));
