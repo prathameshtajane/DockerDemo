@@ -14,6 +14,17 @@ services:
     hostname: redis
     ports:
       - "6379:6379"
+  postgres:
+    image: postgres:9.6.2
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: demo-password
+      POSTGRES_USER: demo-user
+      POSTGRES_DB: dockerdemo
+    volumes:
+      - "/home/trevor/softwareDev/databases/postgres/docker-volume:/var/lib/postgresql/data"
+      
   ha-proxy:
     image: dockercloud/haproxy
     links:
