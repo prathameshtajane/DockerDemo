@@ -3,9 +3,11 @@ services:
   spring-web:
     depends_on:
       - redis
+      - mysql
     image: thomptr/dockerdemo
     links:
       - redis
+      - mysql
     environment:
       - SPRING_PROFILES_ACTIVE=redis
 #    build: .
@@ -14,17 +16,20 @@ services:
     hostname: redis
     ports:
       - "6379:6379"
-  postgres:
-    image: postgres:9.6.2
+  mysql:
+    restart: always
+    image: mysql:5.7
     ports:
-      - "5432:5432"
+      - "3307:3306"
+#    volumes:
+#            - "/home/trevor/softwareDev/mySql/docker/init:/docker-entrypoint-initdb.d"
+#          - "/home/trevor/softwareDev/mySql/docker/bizwrap/data:/var/lib/mysql"
+#          - "/home/trevor/softwareDev/mySql/docker/bizwrap/custom-cnf:/etc/mysql/conf.d"
     environment:
-      POSTGRES_PASSWORD: demo-password
-      POSTGRES_USER: demo-user
-      POSTGRES_DB: dockerdemo
-    volumes:
-      - "/home/trevor/softwareDev/databases/postgres/docker-volume:/var/lib/postgresql/data"
-      
+      MYSQL_ROOT_PASSWORD: demo-password
+      MYSQL_DATABASE: dockerdemo
+      MYSQL_USER: demo-user
+      MYSQL_PASSWORD: demo-password
   ha-proxy:
     image: dockercloud/haproxy
     links:

@@ -1,56 +1,25 @@
 package com.example.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Service;
+import com.example.model.Host;
 
-import javax.annotation.PostConstruct;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
 
 /**
- * Created by trevor on 9/11/16.
+ * Created by trevor on 3/5/17.
  */
-@Service
-public class HostService {
+public interface HostService {
 
-    @Autowired
-    private Environment env;
 
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
+    String getHostIpAddress() throws UnknownHostException;
 
-    private ValueOperations valueOps;
+    String getHostname() throws UnknownHostException;
 
-    private int clusterCount = 0;
+    int calculateClusterCount();
 
-    // Set the cluster count in cache value if it doesn't exist
-    @PostConstruct
-    public void initClusterCount() {
+    Iterable<Host> listAllHosts();
 
-        if (Arrays.asList(env.getActiveProfiles()).contains("redis")) {
-            valueOps = stringRedisTemplate.opsForValue();
-            if (valueOps.get("cluster-count") == null) {
-                valueOps.set("cluster-count", Integer.toString(clusterCount));
-            }
-        }
-    }
+    Host getHostById(Integer id);
 
-    public String getHostIpAddress() throws UnknownHostException {
-        return InetAddress.getLocalHost().getHostAddress();
-    }
-
-    public String getHostname() throws UnknownHostException {
-        return InetAddress.getLocalHost().getHostName();
-    }
-
-    public int calculateClusterCount() {
-
-        clusterCount = Integer.parseInt((String) valueOps.get("cluster-count"));
-        valueOps.set("cluster-count", Integer.toString(++clusterCount));
-        return clusterCount;
-    }
+    Host saveHost(Host product);
+    
 }

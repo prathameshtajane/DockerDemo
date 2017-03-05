@@ -22,14 +22,17 @@ public class HostInfoController {
     private int counter = 0;
     private static final Logger LOGGER = LoggerFactory.getLogger(HostInfoController.class);
 
-    @Autowired
     private Environment env;
+    private HostService hostService;
 
     @Autowired
-    public HostService hostService;
+    public HostInfoController(Environment env, HostService hostService) {
+        this.env = env;
+        this.hostService = hostService;
+    }
 
     @RequestMapping("/host")
-    public Host getHost(Model model) {
+    public String getHost(Model model) {
 
         try {
             String hostname = hostService.getHostname();
@@ -41,7 +44,9 @@ public class HostInfoController {
             } else {
                 model.addAttribute("clusterCount", "Redis not enabled");
             }
-            return new Host(hostService.getHostIpAddress(), hostname);
+            hostService.saveHost(new Host(hostService.getHostIpAddress(), hostname));
+            LOGGER.debug("Saved host {}", hostname);
+            return "host";
         } catch (UnknownHostException e) {
             LOGGER.error("Unable to obtain host information", e);
             return null;
