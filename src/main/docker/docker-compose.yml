@@ -10,6 +10,7 @@ services:
       - mysql
     environment:
       - SPRING_PROFILES_ACTIVE=redis
+    command: ["/wait-for-it.sh", "mysql:3306", "--", "java -Djava.security.egd=file:/dev/./urandom -jar", "/app.jar"]
 #    build: .
   redis:
     image: redis:3.2
