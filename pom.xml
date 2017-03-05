@@ -23,7 +23,6 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<docker.image.prefix>thomptr</docker.image.prefix>
-		<postgres.version>9.4.1212</postgres.version>
 	</properties>
 
 	<dependencies>
@@ -83,11 +82,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>${postgres.version}</version>
-		</dependency>
 	</dependencies>
 
 
