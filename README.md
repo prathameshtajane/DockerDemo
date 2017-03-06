@@ -1,7 +1,7 @@
 # DockerDemo
 Spring Boot application to demo Docker
 
-The Dockerfile copies the jar file from the target folder.  You need to first run "mvn clean package" to create the build artifact and the thomptr/dockerdemo.  
+The Dockerfile copies the jar file from the target folder.  You need to first run "mvn clean package" to create the build artifact and the thomptr/dockerdemo docker image.  
 I have the Spotify Docker Maven plugin running on the package goal so everytime you run "mvn package" you will get a new updated thomptr/dockerdemo Docker image in your local
 docker repo.  I find this workflow works well for compiling code and building a new docker image with your updated code.  You can also build from the docker-compose.yml file.
 
@@ -26,8 +26,8 @@ is per host only.  You can see the difference if you scale the spring-web servic
 
 I recently added a mysql database that just saves the request info.  The trick was to use the wait-for-it.sh script to force the spring-web service wait for 
 the mysql service to be fully available before starting.  If the database is not available when the spring application starts then the spring app will fail.
-You can connect to the mysql database by connecting to 127.0.0.1:3307 using username "demo-user" and password "demo-password".  The mysql container uses the standard port 3306
-when connecting to other containers but exposes port 3307 to the host.  I do this to avoid a port conflict because I already have mysql running on my desktop for other unrelated uses.
+You can connect mysql Workbench to the mysql database by connecting to 127.0.0.1:3307 using username "demo-user" and password "demo-password".  The mysql container uses the standard port 3306
+when connecting to other containers but exposes port 3307 to the host.  I do this to avoid a port conflict because I already have mysql running on standard port 3306 on my desktop for other unrelated uses.
 
 **Spring Boot Actuator**
 
