@@ -1,7 +1,9 @@
 # DockerDemo
 Spring Boot application to demo Docker
 
-The Dockerfile copies the jar file from the target folder.  You need to first run "mvn clean package" to create the build artifact.
+The Dockerfile copies the jar file from the target folder.  You need to first run "mvn clean package" to create the build artifact and the thomptr/dockerdemo.  
+I have the Spotify Docker Maven plugin running on the package goal so everytime you run "mvn package" you will get a new updated thomptr/dockerdemo Docker image in your local
+docker repo.  I find this workflow works well for compiling code and building a new docker image with your updated code.  You can also build from the docker-compose.yml file.
 
 **Docker Compose**
 
